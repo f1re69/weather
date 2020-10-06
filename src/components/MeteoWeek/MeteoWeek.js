@@ -36,7 +36,6 @@ class MeteoWeeks extends React.Component  {
                             {
                                 weather[date].map((hour, key) => <td key={key}><div>
                                     <p>{this.convertTimeStamp(hour.dt)}</p>
-                                    
                                     </div></td>) 
                             }
                         </tr>
@@ -47,8 +46,6 @@ class MeteoWeeks extends React.Component  {
                                 weather[date].map((hour, key) => <td key={key}><div>
                                     <p>{Math.floor(hour.main.temp)}°</p>
                                     <img src={`http://openweathermap.org/img/w/${hour.weather[0].icon}.png`}></img>
-
-                                    {/* <img src={`http://openweathermap.org/img/w/10d.png`}></img> */}
                                     </div></td>) 
                             }
                         </tr>
