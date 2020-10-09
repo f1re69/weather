@@ -6,6 +6,8 @@ import SearchBar from './SearchBar/SearchBar';
 import MeteoWeeks from './MeteoWeek/MeteoWeek';
 import ListOfDays from './ListOfDays/ListOfDays';
 import GlobalStyle from '../themes/globalStyle'
+import Geolocation from './Geolocation/Geolocation'
+
 
 class App extends React.Component {
     state = {
@@ -15,6 +17,7 @@ class App extends React.Component {
         errLocation: null,
         errOpenWeatherMap: null
     }
+
 
     Container = styled.div`
         position: relative;
@@ -36,19 +39,6 @@ class App extends React.Component {
         flex-direction: column;
         align-items: center;
     `
-    
-    componentDidMount() {
-        navigator.geolocation.getCurrentPosition(({coords}) => {
-            this.setState({
-                lat: coords.latitude,
-                lon: coords.longitude
-            })
-        }, err => {
-            this.setState({
-                errLocation: err
-            })
-        })
-    }
 
     render() {
             return(
@@ -56,6 +46,7 @@ class App extends React.Component {
                 <GlobalStyle />
                 <h1>Weather App</h1>
                 <MeteoDataStore>
+                    <Geolocation />
                     <SearchBar />
                     <this.ForecastContainer>
                         <ListOfDays />

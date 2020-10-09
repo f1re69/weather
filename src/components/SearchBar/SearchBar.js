@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MeteoDataContext from '../contexts/MeteoDataContext'
-import getWeather from '../getWeather'
+import getWeather from '../helpers/getWeather'
 
 class SearchBar extends React.Component {
     state = {
@@ -35,7 +35,6 @@ class SearchBar extends React.Component {
         }
     `
 
-
     onChangeValue = e => {
         this.setState({
             city: e.target.value
@@ -43,6 +42,7 @@ class SearchBar extends React.Component {
     }
 
     onSubmitForm = e => {
+        console.log("searchbar", this.context)
         e.preventDefault()       
         getWeather(this.state.city)
         .then(response => {

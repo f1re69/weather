@@ -1,0 +1,6 @@
+Géolocalisation
+Responsive
+Hauteur de la météo changeante quand on change de jour
+Design titre et searchbar
+Autocomplétion
+Faire défiler le forecast horizontalement

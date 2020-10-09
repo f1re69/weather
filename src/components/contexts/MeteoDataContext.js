@@ -4,12 +4,15 @@ const Context = React.createContext([])
 
 export class MeteoDataStore extends React.Component {
   state = {
+    error: "",
     city: "",
     lat: "",
     lon: "",
     data: {},
     currentDay: 0
   }
+
+  onError = error => this.setState({error})
 
   onSearchCity = (city) => this.setState({ city })
 
@@ -22,7 +25,7 @@ export class MeteoDataStore extends React.Component {
   render() {
     return(
       <Context.Provider 
-        value={{...this.state, onSearchCity: this.onSearchCity, onGeolocation: this.onGeolocation, onLoadData: this.onLoadData, onSetDay: this.onSetDay}} >
+        value={{...this.state, onError: this.onError, onSearchCity: this.onSearchCity, onGeolocation: this.onGeolocation, onLoadData: this.onLoadData, onSetDay: this.onSetDay}} >
         {this.props.children}
       </Context.Provider>
     )

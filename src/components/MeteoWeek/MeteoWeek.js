@@ -27,16 +27,14 @@ class MeteoWeeks extends React.Component  {
         const date = Object.keys(weather)[currentDay]
 
         if(Object.keys(weather).length > 0) {
-            console.log(weather[date][0])
-
             return(
                 <this.Table className="">
                     <thead>
                         <tr>
                             {
-                                weather[date].map((hour, key) => <td key={key}><div>
-                                    <p>{this.convertTimeStamp(hour.dt)}</p>
-                                    </div></td>) 
+                            weather[date].map((hour, key) => <td key={key}><div>
+                                <p>{this.convertTimeStamp(hour.dt)}</p>
+                                </div></td>) 
                             }
                         </tr>
                     </thead>
