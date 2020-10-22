@@ -6,6 +6,18 @@ class MeteoWeeks extends React.Component  {
     state = { currentDay: ""}  
     static contextType = MeteoDataContext
 
+    ParentContainer = styled.div`
+        position: relative;
+        margin-top: 1em;
+        `
+        
+        ChildContainer = styled.div`
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        overflow-x: auto;
+        width: 100%;
+    `
     
     Table = styled.table`
         border-collapse: collapse;
@@ -66,11 +78,11 @@ class MeteoWeeks extends React.Component  {
 
     render() {
         return(
-            <div>
-                <div className="">
+            <this.ParentContainer>
+                <this.ChildContainer>
                     {this.showForecast(this.context.data, this.context.currentDay)}
-                </div>
-            </div>
+                </this.ChildContainer>
+            </this.ParentContainer>
         )
     }   
 }

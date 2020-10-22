@@ -23,6 +23,7 @@ class ListOfDays extends React.Component {
   `
 
   Container = styled.div`
+        text-align: center;
         @media screen and (max-width: 450px) {
             display: inline-flex;
             width: 80%;
