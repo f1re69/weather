@@ -6,19 +6,29 @@ class MeteoWeeks extends React.Component  {
     state = { currentDay: ""}  
     static contextType = MeteoDataContext
 
+    
     Table = styled.table`
+        border-collapse: collapse;
         & td {
             padding: 10px;
             text-align: center;
             background-color: #00000087;
             border-color: #0006;
-            border-radius: 4px;
             color: #fff;
         }
-    `
+        & td:nth-child(2n+1) {
+            background-color: #2d0505bd;
+        }
+        & thead tr td.head {
+            // background-color: #00000087;
+        }
+    
+    `;
 
-    convertTimeStamp(dt) {
-        const date = new Date(dt * 1000)
+  
+            
+        convertTimeStamp(dt) {
+            const date = new Date(dt * 1000)
         const options = {month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
         return(date.toLocaleDateString(undefined, options))
     }
@@ -32,7 +42,7 @@ class MeteoWeeks extends React.Component  {
                     <thead>
                         <tr>
                             {
-                            weather[date].map((hour, key) => <td key={key}><div>
+                            weather[date].map((hour, key) => <td className="head" key={key}><div>
                                 <p>{this.convertTimeStamp(hour.dt)}</p>
                                 </div></td>) 
                             }

@@ -22,12 +22,23 @@ class ListOfDays extends React.Component {
         }
   `
 
+  Container = styled.div`
+        @media screen and (max-width: 450px) {
+            display: inline-flex;
+            width: 80%;
+            overflow-x: auto;
+            left: 50%;
+            position: relative;
+            transform: translate(-58%);
+        }
+  `;
+
   render() {
     const date = new Date();
     const currDay = date.getDay();
     const week = getSortedWeek(currDay)
     return(
-        <div className="">
+        <this.Container>
             <this.Button className={this.context.currentDay === 0 ? 'active' : ''} onClick={() => this.context.onSetDay(0)} >
                 {week[0]}
               </this.Button>
@@ -43,7 +54,7 @@ class ListOfDays extends React.Component {
             <this.Button className={this.context.currentDay === 4 ? 'active' : ''} onClick={() => this.context.onSetDay(4)} >
                 {week[4]}
             </this.Button>
-        </div>
+        </this.Container>
       )
   }
 }

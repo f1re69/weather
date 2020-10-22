@@ -27,7 +27,6 @@ class App extends React.Component {
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        width: 50%;
         margin: 0 auto;
         & > * {
             flex-basis: 15%;
@@ -35,9 +34,9 @@ class App extends React.Component {
     `;
 
     ForecastContainer = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
     `
 
     render() {
