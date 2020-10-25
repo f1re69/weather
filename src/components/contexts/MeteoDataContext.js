@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Context = React.createContext([])
+const Context = React.createContext([]);
 
 export class MeteoDataStore extends React.Component {
   state = {
@@ -10,17 +10,17 @@ export class MeteoDataStore extends React.Component {
     lon: "",
     data: {},
     currentDay: 0
-  }
+  };
 
-  onError = error => this.setState({error})
+  onError = error => this.setState({error});
 
-  onSearchCity = (city) => this.setState({ city })
+  onSearchCity = (city) => this.setState({ city });
 
-  onGeolocation = (lat, lon) => this.setState({lat, lon})
+  onGeolocation = (lat, lon) => this.setState({lat, lon});
 
-  onLoadData = data => this.setState({ data })
+  onLoadData = data => this.setState({ data });
 
-  onSetDay = currentDay => this.setState({currentDay})
+  onSetDay = currentDay => this.setState({currentDay});
 
   render() {
     return(
@@ -28,8 +28,8 @@ export class MeteoDataStore extends React.Component {
         value={{...this.state, onError: this.onError, onSearchCity: this.onSearchCity, onGeolocation: this.onGeolocation, onLoadData: this.onLoadData, onSetDay: this.onSetDay}} >
         {this.props.children}
       </Context.Provider>
-    )
+    );
   }
 }
 
-export default Context
+export default Context;

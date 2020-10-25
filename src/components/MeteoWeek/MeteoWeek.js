@@ -1,50 +1,17 @@
 import React from 'react';
-import styled from 'styled-components'
 import MeteoDataContext from '../contexts/MeteoDataContext'
 
+import { ParentContainer, Table } from './MeteoWeekComponents';
+ 
 class MeteoWeeks extends React.Component  {
+    
     state = { currentDay: ""}  
     static contextType = MeteoDataContext
 
-    ParentContainer = styled.div`
-        position: relative;
-        margin-top: 1em;
-
-        @media screen and (max-width: 450px) {
-            .childContainer {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%);
-                overflow-x: auto;
-                width: 100%;
-            }
-        }
-    `;
-        
-    Table = styled.table`
-        border-collapse: collapse;
-        & td {
-            padding: 10px;
-            text-align: center;
-            background-color: #00000087;
-            border-color: #0006;
-            color: #fff;
-        }
-        & td:nth-child(2n+1) {
-            background-color: #2d0505bd;
-        }
-        & thead tr td.head {
-            // background-color: #00000087;
-        }
-    
-    `;
-
-  
-            
     convertTimeStamp(dt) {
-        const date = new Date(dt * 1000)
-        const options = {month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
-        return(date.toLocaleDateString(undefined, options))
+        const date = new Date(dt * 1000);
+        const options = {month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+        return(date.toLocaleDateString(undefined, options));
     }
 
     showForecast(weather, currentDay) {
@@ -52,7 +19,7 @@ class MeteoWeeks extends React.Component  {
 
         if(Object.keys(weather).length > 0) {
             return(
-                <this.Table>
+                <Table>
                     <thead>
                         <tr>{
                             weather[date].map((hour, key) => 
@@ -73,21 +40,21 @@ class MeteoWeeks extends React.Component  {
                             )}
                         </tr>
                     </tbody>
-                </this.Table>
-            )
+                </Table>
+            );
         } else {
-            return ''
+            return '';
         }
     }
 
     render() {
         return(
-            <this.ParentContainer>
+            <ParentContainer>
                 <div className="childContainer">
                     {this.showForecast(this.context.data, this.context.currentDay)}
                 </div>
-            </this.ParentContainer>
-        )
+            </ParentContainer>
+        );
     }   
 }
 

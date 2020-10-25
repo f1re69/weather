@@ -8,19 +8,17 @@ const GlobalStyle = createGlobalStyle`
     src: url(${latoRegular});
     font-weight: normal;
   }
-  * { margin: 0; padding: 0; } html, body { width: 100%; height: 100%; }  
+  * { margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }  
   body {
     font-family: Lato;
     &:before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
       height: 100%;
       width: 100%;
       background-image: url(${backgroundImage});
       background-position: 50%;
-      background-repeat: no-repeat;
       background-size: cover;
     }
   }
