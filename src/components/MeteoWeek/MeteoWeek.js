@@ -9,16 +9,18 @@ class MeteoWeeks extends React.Component  {
     ParentContainer = styled.div`
         position: relative;
         margin-top: 1em;
-        `
+
+        @media screen and (max-width: 450px) {
+            .childContainer {
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%);
+                overflow-x: auto;
+                width: 100%;
+            }
+        }
+    `;
         
-        ChildContainer = styled.div`
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        overflow-x: auto;
-        width: 100%;
-    `
-    
     Table = styled.table`
         border-collapse: collapse;
         & td {
@@ -39,8 +41,8 @@ class MeteoWeeks extends React.Component  {
 
   
             
-        convertTimeStamp(dt) {
-            const date = new Date(dt * 1000)
+    convertTimeStamp(dt) {
+        const date = new Date(dt * 1000)
         const options = {month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
         return(date.toLocaleDateString(undefined, options))
     }
@@ -50,38 +52,40 @@ class MeteoWeeks extends React.Component  {
 
         if(Object.keys(weather).length > 0) {
             return(
-                <this.Table className="">
+                <this.Table>
                     <thead>
-                        <tr>
-                            {
-                            weather[date].map((hour, key) => <td className="head" key={key}><div>
-                                <p>{this.convertTimeStamp(hour.dt)}</p>
-                                </div></td>) 
-                            }
+                        <tr>{
+                            weather[date].map((hour, key) => 
+                            <td className="head" key={key}>
+                                <div><p>{this.convertTimeStamp(hour.dt)}</p></div>
+                            </td>
+                            )}
                         </tr>
                     </thead>
+
                     <tbody>
-                       <tr>
-                            {
-                                weather[date].map((hour, key) => <td key={key}><div>
+                       <tr>{
+                            weather[date].map((hour, key) =>
+                                <td key={key}><div>
                                     <p>{Math.floor(hour.main.temp)}°</p>
                                     <img src={`http://openweathermap.org/img/w/${hour.weather[0].icon}.png`}></img>
-                                    </div></td>) 
-                            }
+                                </div></td>
+                            )}
                         </tr>
                     </tbody>
                 </this.Table>
             )
+        } else {
+            return ''
         }
-       return ''   
     }
 
     render() {
         return(
             <this.ParentContainer>
-                <this.ChildContainer>
+                <div className="childContainer">
                     {this.showForecast(this.context.data, this.context.currentDay)}
-                </this.ChildContainer>
+                </div>
             </this.ParentContainer>
         )
     }   
