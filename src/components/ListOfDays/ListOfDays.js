@@ -1,48 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import MeteoDataContext from '../contexts/MeteoDataContext';
+import { WeatherContext } from '../contexts/WeatherContext.js';
 import { Button, Container } from './ListOfDaysComponents';
 
-class ListOfDays extends React.Component {
-    static contextType = MeteoDataContext;
-    
-    getSortedWeek = firstDay => {
-        const daysOfWeek = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-        const updatedWeek = [];
-    
-        for (let i = 0; i < 7; i++) {
-            let currentDay = (firstDay + i) % 7;
-            updatedWeek[i] = daysOfWeek[currentDay];
-        }
-        return(updatedWeek);
-    }
-
-  render() {
+const ListOfDays = () => {
+    const [
+        error, setError,
+        city, setCity,
+        lat, setLat,
+        lon, setLon,
+        data, setData,
+        currentDay, setCurrentDay
+    ] = useContext(WeatherContext);
     const date = new Date();
     const currDay = date.getDay();
-    const week = this.getSortedWeek(currDay);
-
+    const week = getSortedWeek(currDay);
+  
     return(
         <Container>
-            <Button className={this.context.currentDay === 0 ? 'active' : ''} onClick={() => this.context.onSetDay(0)} >
+            <Button className={currentDay === 0 ? 'active' : ''} onClick={() => setCurrentDay(0)} >
                 {week[0]}
               </Button>
-            <Button className={this.context.currentDay === 1 ? 'active' : ''} onClick={() => this.context.onSetDay(1)} >
+            <Button className={currentDay === 1 ? 'active' : ''} onClick={() => setCurrentDay(1)} >
                 {week[1]}
             </Button>
-            <Button className={this.context.currentDay === 2 ? 'active' : ''} onClick={() => this.context.onSetDay(2)} >
+            <Button className={currentDay === 2 ? 'active' : ''} onClick={() => setCurrentDay(2)} >
                 {week[2]}
             </Button>
-            <Button className={this.context.currentDay === 3 ? 'active' : ''} onClick={() => this.context.onSetDay(3)} >
+            <Button className={currentDay === 3 ? 'active' : ''} onClick={() => setCurrentDay(3)} >
                 {week[3]}
             </Button>
-            <Button className={this.context.currentDay === 4 ? 'active' : ''} onClick={() => this.context.onSetDay(4)} >
+            <Button className={currentDay === 4 ? 'active' : ''} onClick={() => setCurrentDay(4)} >
                 {week[4]}
             </Button>
         </Container>
-      )
-  }
+    );
 }
 
+const getSortedWeek = firstDay => {
+    const days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+    const sortedDays = [];
 
-export default ListOfDays
+    for (let i = 0; i < 7; i++) {
+        let currentDay = (firstDay + i) % 7;
+        sortedDays[i] = days[currentDay];
+    }
+    return(sortedDays);
+}
+
+export default ListOfDays;

@@ -1,6 +1,5 @@
 import openWeatherMap from '../../apis/openWeatherMap'
 
-
 const getWeather = props => {
   if (typeof props === "string") {
     return(

@@ -1,33 +1,25 @@
 import React from 'react';
 
-import { MeteoDataStore } from '../contexts/MeteoDataContext';
+import { WeatherContextProvider } from '../contexts/WeatherContext.js';
 import SearchBar from '../SearchBar/SearchBar';
-import MeteoWeeks from '../MeteoWeek/MeteoWeek';
+import { MeteoWeeks } from '../MeteoWeek/MeteoWeek';
 import ListOfDays from '../ListOfDays/ListOfDays';
 import GlobalStyle from '../../themes/globalStyle';
 import Geolocation from '../Geolocation/Geolocation';
 import { Container } from './AppComponents';
 
 class App extends React.Component {
-    state = {
-        city: '',
-        lat: '',
-        lon: '',
-        errLocation: null,
-        errOpenWeatherMap: null
-    };
-
     render() {
         return(
             <Container>
                 <GlobalStyle />
                 <h1>Weather App</h1>
-                <MeteoDataStore>
+                <WeatherContextProvider>
                     <Geolocation />
                     <SearchBar />
                     <ListOfDays />
                     <MeteoWeeks />
-                </MeteoDataStore>
+                </WeatherContextProvider>
             </Container>
         );
     }
