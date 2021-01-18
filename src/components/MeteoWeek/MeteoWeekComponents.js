@@ -4,12 +4,13 @@ export const ParentContainer = styled.div`
         position: relative;
         margin-top: 1em;
         @media screen and (max-width: 450px) {
+            width: 100%;    
             .childContainer {
                 position: absolute;
-                left: 50%;
-                transform: translate(-50%);
+                left: 2%;
+                /*transform: translate(-50%);*/
                 overflow-x: auto;
-                width: 100%;
+                width: 95%;
             }
         }
     `;

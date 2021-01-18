@@ -19,10 +19,8 @@ export const Container = styled.div`
         text-align: center;
         @media screen and (max-width: 450px) {
             display: inline-flex;
-            width: 80%;
+            width: 95%;
             overflow-x: auto;
-            left: 50%;
             position: relative;
-            transform: translate(-58%);
         }
   `;
