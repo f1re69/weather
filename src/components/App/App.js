@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { WeatherContextProvider } from '../contexts/WeatherContext.js';
+import { WeatherContextProvider } from '../../contexts/WeatherContext.js';
 import SearchBar from '../SearchBar/SearchBar';
 import { MeteoWeeks } from '../MeteoWeek/MeteoWeek';
 import ListOfDays from '../ListOfDays/ListOfDays';

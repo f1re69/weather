@@ -1,22 +1,17 @@
 import React, { useContext } from 'react';
 
-import { WeatherContext } from '../contexts/WeatherContext.js';
+import { WeatherContext } from '../../contexts/WeatherContext.js';
 import { ParentContainer, Table } from './MeteoWeekComponents';
  
 export const MeteoWeeks = () => {
-    const [
-        error, setError,
-        city, setCity,
-        lat, setLat,
-        lon, setLon,
-        data, setData,
-        currentDay, setCurrentDay
-    ] = useContext(WeatherContext);
+    const {weather} = useContext(WeatherContext);
+    const {data, selectedDay} = weather;
+    console.log(data)
 
     return(
         <ParentContainer>
             <div className="childContainer">
-                {showForecast(data, currentDay)}
+                {showForecast(data, selectedDay)}
             </div>
         </ParentContainer>
     );
@@ -28,15 +23,14 @@ const convertTimeStamp = dt => {
     return(date.toLocaleDateString('fr-FR', options));
 };
 
-const showForecast = (weather, currentDay) => {
-    const date = Object.keys(weather)[currentDay]
-
-    if(Object.keys(weather).length > 0) {
+const showForecast = (data, currentDay) => {
+    const date = Object.keys(data)[currentDay]
+    if(Object.keys(data).length > 0) {
         return(
             <Table>
                 <thead>
                     <tr>{
-                        weather[date].map((hour, key) => 
+                        data[date].map((hour, key) => 
                         <td className="head" key={key}>
                             <div><p>{convertTimeStamp(hour.dt)}</p></div>
                         </td>
@@ -46,7 +40,7 @@ const showForecast = (weather, currentDay) => {
 
                 <tbody>
                    <tr>{
-                        weather[date].map((hour, key) =>
+                        data[date].map((hour, key) =>
                             <td key={key}><div>
                                 <p>{Math.floor(hour.main.temp)}°</p>
                                 <img src={`http://openweathermap.org/img/w/${hour.weather[0].icon}.png`}></img>

@@ -19,7 +19,6 @@ const getWeather = props => {
     )
   }
   if (typeof props === "object") {
-    console.log("object")
     return(
       openWeatherMap.get(openWeatherMap.defaults.baseURL, {
       params: {

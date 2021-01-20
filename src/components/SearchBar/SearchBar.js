@@ -1,24 +1,18 @@
 import React, { useState, useContext } from 'react';
 
-import { WeatherContext } from '../contexts/WeatherContext.js';
+import { WeatherContext } from '../../contexts/WeatherContext.js';
 import getWeather from '../helpers/getWeather';
 import { Container } from './SearchBarComponents';
 
 
 const SearchBar = () => {
     const [formInput, setFormInput] = useState("");
-    const [
-        error, setError,
-        city, setCity,
-        lat, setLat,
-        lon, setLon,
-        data, setData,
-        currentDay, setCurrentDay
-    ] = useContext(WeatherContext);
-    
+    const {weather, setCity, setData, setError} = useContext(WeatherContext);
+
     const onChangeValue = e => {
         setFormInput(e.target.value);
     };
+    
     const onSubmitForm = e => {
         e.preventDefault();
         getWeather(formInput)
@@ -32,9 +26,9 @@ const SearchBar = () => {
                 setCity(formInput);
                 setData(structuredData);
             })
-            .catch(error => console.log("SearchBar error",error));
+            .catch(error => setError(error));
     };
- 
+    
     return(
         <Container>
             <form onSubmit={onSubmitForm}>
