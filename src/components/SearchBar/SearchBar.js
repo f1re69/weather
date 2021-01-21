@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-
 import { WeatherContext } from '../../contexts/WeatherContext.js';
 import getWeather from '../helpers/getWeather';
 import { Container } from './SearchBarComponents';
@@ -7,7 +6,7 @@ import { Container } from './SearchBarComponents';
 
 const SearchBar = () => {
     const [formInput, setFormInput] = useState("");
-    const {weather, setCity, setData, setError} = useContext(WeatherContext);
+    const {weather, dispatch} = useContext(WeatherContext);
 
     const onChangeValue = e => {
         setFormInput(e.target.value);
@@ -23,10 +22,10 @@ const SearchBar = () => {
                     return acc;
                 }, {});
                 // Store data meteo to Context for MeteoDays components that will directly access data
-                setCity(formInput);
-                setData(structuredData);
+                dispatch({type: 'SET_CITY', city: formInput});
+                dispatch({type: 'SET_DATA', data: structuredData});
             })
-            .catch(error => setError(error));
+            .catch(error => dispatch({type: 'SET_ERROR', error}));
     };
     
     return(

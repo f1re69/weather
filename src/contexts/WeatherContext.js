@@ -1,10 +1,11 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useReducer, createContext } from 'react';
+import {weatherReducer} from '../reducers/weatherReducer';
 
 export const WeatherContext = createContext();
 
 export const WeatherContextProvider = props => {
-
-  const [weather, setWeather] = useState({
+  
+  const [weather, dispatch] = useReducer(weatherReducer, {
     error: "",
     city: "",
     lat: "",
@@ -13,41 +14,8 @@ export const WeatherContextProvider = props => {
     selectedDay: 0
   })
 
-  const setError = (error) => {
-      // weather.error = error;
-      // setWeather(weather);
-      setWeather(Object.assign({}, weather, { error }));
-
-  }
-  const setCity = (city) => {
-      // weather.city = city;
-      // setWeather(weather)
-      setWeather(Object.assign({}, weather, { city }));
-
-  }
-  const setCoord = (lat, lon) => {
-    // weather.lat = lat;
-    // weather.lon = lon
-    // setWeather(weather)
-    setWeather(Object.assign({}, weather, { lat, lon }));
-
-  }  
-  const setData = (data) => {
-    // weather.data = data;
-    // setWeather(weather);
-    // console.log(data)
-    setWeather(Object.assign({}, weather, { data }));
-
-  }  
-  const setSelectedDay = (selectedDay) => {
-    // weather.selectedDay(selectedDay);
-    // setWeather(weather);
-    setWeather(Object.assign({}, weather, { selectedDay }));
-
-  }
-
   return(
-    <WeatherContext.Provider value={{weather, setError, setCity, setCoord, setData, setSelectedDay}}>
+    <WeatherContext.Provider value={{weather, dispatch}}>
       {props.children}
     </WeatherContext.Provider>
   );

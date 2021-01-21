@@ -1,10 +1,9 @@
 import { useContext, useEffect } from 'react';
-
 import getWeather from '../helpers/getWeather';
 import { WeatherContext } from '../../contexts/WeatherContext';
 
 const Geolocation = () => {
-  const { weather, setData, setError } = useContext(WeatherContext);
+  const { weather, dispatch } = useContext(WeatherContext);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords}) => {
@@ -16,11 +15,9 @@ const Geolocation = () => {
                         return acc;
                   }, {});
                   // Store data meteo to Context for MeteoDays components that will directly access data
-                  setData(structuredData);
-                  // setData(structuredData);
+                  dispatch({type: 'SET_DATA', data: structuredData});
             });
-    // }, error => setError(error));
-    }, error => setError(error));
+    }, error => dispatch({type: 'SET_ERROR', error}));
   }, []);
 
   return null;
