@@ -20,8 +20,8 @@ Ce projet est une application web de prévisions météorologiques. Elle permet 
 Pour installer et lancer le projet localement, suivez les étapes suivantes :
 
 ```bash
-git clone https://votre-repo-git.com
-cd chemin-vers-votre-repo
+git clone https://github.com/f1re69/weather
+cd weather
 npm install
 npm start
 ```
